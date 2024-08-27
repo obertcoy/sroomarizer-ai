@@ -2,3 +2,7 @@ SROOMARIZER/
 PDF/
 data/train_model/model
 data/train_model/model_2
+data/train_txt
+data/txt
+data/val_txt
+data/annotations
