@@ -1,6 +1,6 @@
 PRETRAINED_SENTENCE_TRANSFORMERS_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
 
-SKILLS_PATTERN_PATH = '.data/entity_ruler/skill_patterns.jsonl'
+SKILLS_PATTERN_PATH = './data/entity_ruler/skill_patterns.jsonl'
 JOB_TITLE_PATH = './data/job_title/Job Title.csv'
 
 DUMMY_JOB_DESCRIPTION = """
@@ -60,3 +60,9 @@ RATING_WEIGHTS = {
         
 }
 
+YEARS_EXPERIENCE_KEYWORDS_WEIGHTS = {
+    
+    'KEYWORDS_MATCH' : 0.5,
+    'KEYWORDS_CONTEXT' : 0.5
+    
+}

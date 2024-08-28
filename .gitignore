@@ -7,3 +7,7 @@ data/train_txt
 data/txt
 data/val_txt
 data/annotations
+sroomarizer.ipynb
+summarizer.ipynb
+ner_model.ipynb
+info_extractor.ipynb
