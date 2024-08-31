@@ -38,6 +38,8 @@ class ResumeRater:
         
         self._resume_text, self._resume_features = self._extractor.fit_transform(resume_text)
         
+        # print(self._resume_features)
+        
         for feature in self._resume_features:
         
             feature['rating_details'] = {
@@ -72,7 +74,7 @@ class ResumeRater:
             feature['rating'] = final_rating
             
         
-        return self._resume_text, self._resume_features
+        return self._job_features, self._resume_features
     
     def top_resume_by_rating(self, k = 5):
         
@@ -85,9 +87,24 @@ class ResumeRater:
 
         return top_k_resumes
     
+    def _check_feature_availability(self, job_feature: List[str], resume_feature: List[str]):
+        
+        if len(job_feature) <= 0 or not job_feature:
+            return 1
+        
+        if len(resume_feature) <= 0 or not resume_feature:
+            return 0
+        
+        return -1
+        
     
     def _calculate_cosine_similarity_matrix_mean(self, job_feature_category: List[str], resume_feature_category: List[str], use_threshold= False, threshold= 0.42):
         
+        check_feature = self._check_feature_availability(job_feature_category, resume_feature_category)
+        
+        if check_feature != -1:
+            return check_feature
+                
         job_embeddings = self._pretrained_model.encode(job_feature_category)
         resume_embeddings  = self._pretrained_model.encode(resume_feature_category)
         
@@ -110,11 +127,11 @@ class ResumeRater:
         return float(score)
 
     def _calculate_matching_words_score(self, job_word_list: List[str], resume_word_list: List[str]):
+                
+        check_feature = self._check_feature_availability(job_word_list, resume_word_list)
         
-        n_job_word = len(job_word_list)
-        
-        if n_job_word <= 0:
-            return 1 # No extracted word on the category
+        if check_feature != -1:
+            return check_feature
         
         job_word_list = [word.lower() for word in job_word_list]
         resume_word_list = [word.lower() for word in resume_word_list]
@@ -126,10 +143,13 @@ class ResumeRater:
             if resume_word in job_word_list:
                 score += 1
 
+        n_job_word = len(job_word_list)
+
         score /= n_job_word
         
         return score
-        
+    
+
     
     def _rate_educations(self, resume_feature: List[str]):
         
