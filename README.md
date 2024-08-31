@@ -1,1 +1,2 @@
-Run: fastapi dev main.py
+Run: 
+fastapi dev main.py
