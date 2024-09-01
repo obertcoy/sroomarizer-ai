@@ -176,14 +176,16 @@ class FeaturesExtractor:
                     keywords_match = ' '.join(skills + languages)
                     keywords_context = ' '.join(job_titles)
 
-                    years_experience_dict = {
-                        'text': sentence,
-                        'year': year,
-                        'keywords_match': keywords_match,
-                        'keywords_context': keywords_context
-                    }
-                    
-                    years_experiences.append(years_experience_dict)
+                    if keywords_match or keywords_context:
+
+                        years_experience_dict = {
+                            'text': sentence,
+                            'year': year,
+                            'keywords_match': keywords_match,
+                            'keywords_context': keywords_context
+                        }
+                        
+                        years_experiences.append(years_experience_dict)
 
                 except Exception as e:
                     print(f"Error processing match {match}: {e}")
