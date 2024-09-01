@@ -6,3 +6,4 @@ spacy==3.7.5
 sentence-transformers==3.0.1
 fastapi==0.112.2
 jsonlines==4.0.0
+uvicorn
