@@ -1,3 +1,8 @@
+Make Virtual Environment (Python 3.10.9)
+
+Install dependency:
+pip install -r requirements.txt
+
 Run: 
 fastapi dev main.py
 
